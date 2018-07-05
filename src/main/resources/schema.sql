@@ -5,4 +5,4 @@ id int auto_increment not null primary key,
 symbol varchar(255),
 price double,
 volume int,
-Date date)
+Date timestamp)
