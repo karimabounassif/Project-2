@@ -5,11 +5,12 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 
 import java.io.File;
 import java.io.IOException;
+import java.net.URL;
 import java.util.List;
 
 public class Downloader {
 
-    public static List<Quote> download(File url) throws IOException {
+    public static List<Quote> download(URL url) throws IOException {
         List<Quote> quotes;
         ObjectMapper map = new ObjectMapper();
         quotes = (map.readValue(url, new TypeReference<List<Quote>>(){}));

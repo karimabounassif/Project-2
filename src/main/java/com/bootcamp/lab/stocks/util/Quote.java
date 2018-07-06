@@ -1,20 +1,23 @@
 package com.bootcamp.lab.stocks.util;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
 import java.util.Date;
 
 @Entity
+@Table(name = "quote")
 public class Quote {
 
     @Id
     @GeneratedValue(strategy=GenerationType.IDENTITY)
+    @Column(name = "id")
     private Integer id;
+    @Column(name = "symbol")
     private String symbol;
+    @Column(name = "price")
     private double price;
+    @Column(name = "volume")
     private int volume;
+    @Column(name = "Date")
     private Date date;
 
     public String getSymbol(){

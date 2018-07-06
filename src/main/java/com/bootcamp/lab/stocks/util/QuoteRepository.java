@@ -12,7 +12,7 @@ import java.util.List;
 @Repository
 public interface QuoteRepository extends JpaRepository<Quote, Long> {
 
-    @Query("select new QuoteAgg(MAX(q.price), MIN(q.price), SUM(q.volume)) from Quote q where q.symbol = :symbol and date(q.date) = :date")
+    @Query("select new com.bootcamp.lab.stocks.util.QuoteAgg(MAX(q.price), MIN(q.price), SUM(q.volume)) from Quote q where q.symbol = :symbol and date(q.date) = :date")
     public QuoteAgg aggResults(@Param("symbol") String sym, @Param("date") Date date);
 
     @Query("select q.price from Quote q where q.symbol = :symbol and q.date = (select max(x.date) " +

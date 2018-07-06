@@ -2,7 +2,6 @@ package com.bootcamp.lab.stocks.util;
 
 import javax.persistence.*;
 
-@Entity
 public class QuoteAgg {
 
     @Id

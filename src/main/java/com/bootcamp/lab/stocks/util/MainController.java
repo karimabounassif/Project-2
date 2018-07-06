@@ -3,8 +3,8 @@ package com.bootcamp.lab.stocks.util;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.stereotype.Controller;
-import java.io.File;
 import java.io.IOException;
+import java.net.URL;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -18,13 +18,13 @@ public class MainController {
 
     @PostMapping("/pop")
     public @ResponseBody String populate() throws IOException {
-        qr.saveAll(Downloader.download(new File("/Users/karimabounassif/BootCamp/stocks/src/main/resources/dataset.json")));
+        qr.saveAll(Downloader.download(new URL("https://bootcamp-training-files.cfapps.io/week2/week2-stocks.json")));
         return "Saved.";
     }
 
     @GetMapping("/pop")
     public @ResponseBody String getPopulate() throws IOException {
-        qr.saveAll(Downloader.download(new File("/Users/karimabounassif/BootCamp/stocks/src/main/resources/dataset.json")));
+        qr.saveAll(Downloader.download(new URL("https://bootcamp-training-files.cfapps.io/week2/week2-stocks.json")));
         return "Saved.";
     }
 
