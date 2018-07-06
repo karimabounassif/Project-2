@@ -12,10 +12,10 @@ import java.util.List;
 @Repository
 public interface QuoteRepository extends JpaRepository<Quote, Long> {
 
-    @Query("SELECT MAX(price), MIN(price), SUM(volume) from Quote q where q.symbol = :symbol and date(q.date) = :date")
-    public String aggResults(@Param("symbol") String sym, @Param("date") Date date);
+    @Query("select new QuoteAgg(MAX(q.price), MIN(q.price), SUM(q.volume)) from Quote q where q.symbol = :symbol and date(q.date) = :date")
+    public QuoteAgg aggResults(@Param("symbol") String sym, @Param("date") Date date);
 
-    /*@Query("select * from Quote q where q.symbol = :symbol and q.Date = (select max(Date) " +
-            "from Quote x where date(x.Date) = :date and x.symbol = :symbol)")
-    public void closing(@Param("symbol") String sym, @Param("date") Date date);*/
+    @Query("select q.price from Quote q where q.symbol = :symbol and q.date = (select max(x.date) " +
+            "from Quote x where date(x.date) = :date and x.symbol = :symbol)")
+    public Double closing(@Param("symbol") String sym, @Param("date") Date date);
 }
