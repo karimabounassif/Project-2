@@ -29,13 +29,27 @@ public class MainController {
     }
 
     @GetMapping("/{symbol}/{date}")
-    public @ResponseBody String agg(@PathVariable(value = "symbol") String symbol, @PathVariable(value = "date") String date) throws ParseException {
+    public @ResponseBody QuoteAgg agg(@PathVariable(value = "symbol") String symbol, @PathVariable(value = "date") String date) throws ParseException {
         Date toDate = new SimpleDateFormat("yyyy-MM-dd").parse(date);
         QuoteAgg results;
         results = qr.aggResults(symbol, toDate);
         results.setClosing(qr.closing(symbol, toDate));
         results.setSymbol(symbol);
         results.setDate(toDate.toString());
-        return results.displayAgg();
+        return results;
+    }
+
+    @GetMapping("/monthly/{symbol}/{date}")
+    public @ResponseBody QuoteAgg monthlyAgg(@PathVariable(value = "symbol") String symbol, @PathVariable(value = "date") String date) throws ParseException {
+        String year = date.split("-")[0];
+        String month = date.split("-")[1];
+        Date start = new SimpleDateFormat("yyyy-MM-dd").parse(year+"-"+month+"-01");
+        Date end = new SimpleDateFormat("yyyy-MM-dd").parse(year+"-"+String.valueOf(Integer.parseInt(month)+1)+"-01");
+        QuoteAgg mAgg;
+        mAgg = qr.monthlyAgg(start, end, symbol);
+        mAgg.setSymbol(symbol);
+        mAgg.setDate(start.toString());
+        mAgg.setClosing(0);
+        return mAgg;
     }
 }

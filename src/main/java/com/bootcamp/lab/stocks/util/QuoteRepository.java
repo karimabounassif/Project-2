@@ -18,4 +18,9 @@ public interface QuoteRepository extends JpaRepository<Quote, Long> {
     @Query("select q.price from Quote q where q.symbol = :symbol and q.date = (select max(x.date) " +
             "from Quote x where date(x.date) = :date and x.symbol = :symbol)")
     public Double closing(@Param("symbol") String sym, @Param("date") Date date);
+
+    @Query("select new com.bootcamp.lab.stocks.util.QuoteAgg(max(q.price), min(q.price), sum(q.volume)) from Quote q where q.date between" +
+            ":startDate and :endDate and q.symbol = :symbol")
+    public QuoteAgg monthlyAgg(@Param("startDate") Date start, @Param("endDate") Date end, @Param("symbol") String symbol);
 }
+

@@ -9,14 +9,11 @@ public class QuoteAgg {
     private Integer id;
     private String date;
     private String symbol;
-    private double high;
-    private double low;
-    private long volume;
-    private double closing;
-    /*private double monthlyHigh;
-    private double monthlyLow;
-    private int monthlyVolume;
-    private double monthlyClosing;*/
+    private Double high;
+    private Double low;
+    private Long volume;
+    private Double closing;
+
 
     public QuoteAgg(double high, double low, long volume){
         this.high = high;
@@ -42,27 +39,14 @@ public class QuoteAgg {
     public void setClosing(double c){ this.closing = c; }
     public double getClosing(){ return this.closing; }
 
-    /*public void setMonthlyHigh(double h){ this.monthlyHigh = h; }
-    public double getMonthlyHigh(){ return this.monthlyHigh; }
 
-    public void setMonthlyLow(double l){ this.monthlyLow = l; }
-    public double getMonthlyLow(){ return this.monthlyLow; }
-
-    public void setMonthlyVolume(int v){ this.monthlyVolume = v; }
-    public int getMonthlyVolume(){ return this.monthlyVolume; }
-
-    public void setMonthlyClosing(double c){ this.monthlyClosing = c; }
-    public double getMonthlyClosing(){ return this.monthlyClosing; }
-*/
     public String displayAgg(){
         return "Aggregate data for " + getSymbol() + " on " + getDate() + ":\nHigh: " + getHigh() + "\nLow: " + getLow()
                 + "\nClosing Price: " + getClosing() + "\nTotal Volume: " + getVolume();
     }
 
-    /*public void displayMonthlyAgg(){
-        String month = this.date.split("-")[1];
-        System.out.println("\nAggregate values for " + symbol + " in " + month(month) + ": \nHigh: " + getMonthlyHigh()
-                + "\nLow: " + getMonthlyLow() + "\nClosing Price: " + getMonthlyClosing() + "\nVolume: " +
-                getMonthlyVolume());
-    }*/
+    public String displayMonthly(){
+        return "High: " + getHigh() + "\nLow: " + getLow()
+                +  "\nTotal Volume: " + getVolume();
+    }
 }

@@ -16,5 +16,4 @@ public class Downloader {
         quotes = (map.readValue(url, new TypeReference<List<Quote>>(){}));
         return quotes;
     }
-
 }
